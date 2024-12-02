@@ -12,9 +12,10 @@ import {
 } from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
+import {ScreenNavigationProp} from '../types'
 
 export default function Login() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<ScreenNavigationProp>();
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   return (
@@ -33,27 +34,27 @@ export default function Login() {
           </View>
           <View style={styles.inputContainer}>
             <View style={styles.textInputContainer}>
-            <Image style={styles.icon} source={require('./images/envelope-regular.png')}></Image>
+            <Image style={styles.icon} source={require('../images/envelope-regular.png')}></Image>
               <TextInput style={styles.textInput} placeholder="Enter Email" />
             </View>
             <View style={styles.textInputContainer}>
-            <Image style={styles.icon} source={require('./images/lock-solid.png')}></Image>
+            <Image style={styles.icon} source={require('../images/lock-solid.png')}></Image>
               <TextInput
                 style={styles.textInput}
                 placeholder="Enter Password"
                 secureTextEntry={!passwordVisible}
               />
               <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)}>
-              <Image style={styles.icon} source={require('./images/eye-regular.png')}></Image>
+              <Image style={styles.icon} source={require('../images/eye-regular.png')}></Image>
               </TouchableOpacity>
             </View>
-              <TouchableOpacity style={styles.forgotPassword}>
+              <TouchableOpacity>
                 <Text style={styles.forgotText}>Forgot Your Password?</Text>
               </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.loginButton}
-              onPress={() => navigation.popTo('Home')}>
+              onPress={() => navigation.popTo('HomeScreen')}>
               <Text style={styles.buttonText}>LOGIN</Text>
             </TouchableOpacity>
             <View></View>

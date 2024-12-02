@@ -11,9 +11,10 @@ import {
   Image
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import {ScreenNavigationProp} from '../types'
 
 export default function Signup() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<ScreenNavigationProp>();
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   return (
@@ -32,15 +33,15 @@ export default function Signup() {
           </View>
           <View style={styles.inputContainer}>
             <View style={styles.textInputContainer}>
-              <Image style={styles.icon} source={require('./images/user-solid.png')} />
+              <Image style={styles.icon} source={require('../images/user-solid.png')} />
               <TextInput style={styles.textInput} placeholder="Enter Full Name" />
             </View>
             <View style={styles.textInputContainer}>
-              <Image style={styles.icon} source={require('./images/envelope-solid.png')} />
+              <Image style={styles.icon} source={require('../images/envelope-solid.png')} />
               <TextInput style={styles.textInput} placeholder="Enter Email" />
             </View>
             <View style={styles.textInputContainer}>
-              <Image style={styles.icon} source={require('./images/phone-solid.png')} />
+              <Image style={styles.icon} source={require('../images/phone-solid.png')} />
               <TextInput
                 style={styles.textInput}
                 placeholder="Enter Phone Number"
@@ -48,19 +49,19 @@ export default function Signup() {
               />
             </View>
             <View style={styles.textInputContainer}>
-              <Image style={styles.icon} source={require('./images/lock-solid.png')} />
+              <Image style={styles.icon} source={require('../images/lock-solid.png')} />
               <TextInput
                 style={styles.textInput}
                 placeholder="Enter Password"
                 secureTextEntry={!passwordVisible}
               />
               <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)}>
-                <Image style={styles.icon} source={require('./images/eye-regular.png')} />
+                <Image style={styles.icon} source={require('../images/eye-regular.png')} />
               </TouchableOpacity>
             </View>
             <TouchableOpacity
               style={styles.loginButton}
-              onPress={() => navigation.popTo('Home')}>
+              onPress={() => navigation.popTo('HomeScreen')}>
               <Text style={styles.buttonText}>SIGNUP</Text>
             </TouchableOpacity>
           </View>
