@@ -8,7 +8,8 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   Platform,
-  Image
+  Image,
+  ImageBackground
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {ScreenNavigationProp} from '../types'
@@ -24,6 +25,11 @@ export default function Signup() {
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled">
+          <ImageBackground
+      source={require('../images/background.jpg')}
+      style={styles.background}
+      blurRadius={10}
+      resizeMode="cover">
         <View style={styles.container}>
           <View style={styles.titleContainer}>
             <Text></Text>
@@ -77,15 +83,19 @@ export default function Signup() {
             </TouchableOpacity>
           </View>
         </View>
+        </ImageBackground>
       </ScrollView>
     </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+  },
   container: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: 'rgba(0,0,0,0.8)',
     paddingHorizontal: 40,
     paddingVertical: 30,
   },
@@ -172,4 +182,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     includeFontPadding: false,
   },
+
 });

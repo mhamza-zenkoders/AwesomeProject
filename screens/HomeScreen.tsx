@@ -19,7 +19,7 @@ export default function HomeScreen() {
 
           <Text style={styles.menuBoxText}>Calculator</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.menuBox} >
+        <TouchableOpacity style={styles.menuBox} onPress={()=>(navigation.navigate('ToDoHomeScreen'))}>
           <Image
             style={styles.menuIcon}
             source={require('../images/to-do-list.png')}></Image>

@@ -5,6 +5,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  View,
 } from "react-native";
 import { useState } from "react";
 import { getNote, saveNote } from "../services/NoteStorageService";
@@ -20,11 +21,11 @@ export const NoteTakingInput: React.FC<Props> = ({ noteId }) => {
   const navigation = useNavigation<ScreenNavigationProp>();
   const [text, setText] = useState<string>("");
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerLeft: () => <SaveNoteButton id={noteId ?? ""} text={text} />,
-    });
-  }, [navigation, text, noteId]);
+  // useLayoutEffect(() => {
+  //   navigation.setOptions({
+  //     headerLeft: () => <SaveNoteButton id={noteId ?? ""} text={text} />,
+  //   });
+  // }, [navigation, text, noteId]);
 
   useEffect(() => {
     if (noteId) {
@@ -40,11 +41,13 @@ export const NoteTakingInput: React.FC<Props> = ({ noteId }) => {
         value={text}
         onChangeText={(text) => setText(text)}
       />
+      <SaveNoteButton id={noteId ?? ""} text={text} />
     </>
   );
 };
 
 const styles = StyleSheet.create({
+
   input: {
     backgroundColor: "#141414",
     width: "100%",

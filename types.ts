@@ -10,6 +10,7 @@ export type RootStackParamList = {
   Calculator: undefined;
   NotesHomeScreen: undefined;
   EditNote: { noteId: string | undefined };
+  ToDoHomeScreen: undefined;
 };
 
 export type ScreenNavigationProp =

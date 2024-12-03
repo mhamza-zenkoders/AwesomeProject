@@ -28,10 +28,17 @@ export const DeleteNoteButton: React.FC<Props> = ({ noteId }) => {
 
 const styles = StyleSheet.create({
   button: {
-    paddingRight: 20,
-  },
-  buttonText:{
-    color:'#B1DDB8',
+    backgroundColor: "#b1ddb8",
+    paddingHorizontal: 30,
+    paddingVertical:10,
+    borderRadius: 10,
+    marginTop:20,
+    justifyContent:'center'
   },
 
+  buttonText:{
+    color:'#000000',
+    fontSize:18,
+    fontWeight:'bold',
+  },
 });

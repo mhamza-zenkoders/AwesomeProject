@@ -14,7 +14,7 @@ import {Stopwatch} from './Stopwatch';
 import {Calculator} from './Calculator';
 import {NotesHomeScreen} from './takenotes/screens/NotesHomeScreen';
 import {EditNoteScreen} from './takenotes/screens/EditNoteScreen';
-
+import {ToDoHomeScreen} from './ToDoList/ToDoHomeScreen';
 import {AddNoteButton} from './takenotes/components/AddNoteButton';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -22,15 +22,13 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootStack() {
   return (
     <Stack.Navigator
-    //initialRouteName='NotesHomeScreen'
+      // initialRouteName='NotesHomeScreen'
       screenOptions={{
         headerTitleAlign: 'center',
         headerStyle: {
           backgroundColor: '#222222',
         },
-        
       }}>
-        
       <Stack.Screen
         name="Intro"
         component={Intro}
@@ -80,10 +78,18 @@ function RootStack() {
         options={{
           headerTitle: 'All Notes',
           headerTitleStyle: styles.headerTitle,
-          headerRight: () => <AddNoteButton />,
+          // headerRight: () => <AddNoteButton />,
         }}
       />
       <Stack.Screen name="EditNote" component={EditNoteScreen} />
+      <Stack.Screen
+        name="ToDoHomeScreen"
+        component={ToDoHomeScreen}
+        options={{
+          headerTitle: 'All Tasks',
+          headerTitleStyle: styles.headerTitle,
+        }}
+      />
     </Stack.Navigator>
   );
 }
