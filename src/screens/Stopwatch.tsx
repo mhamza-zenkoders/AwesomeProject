@@ -65,7 +65,7 @@ export const Stopwatch: React.FC = () => {
           <Text style={styles.btnText}> Pause </Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.startButton} onPress={handleStart}>
-          <Image style={styles.playIcon} source={require('./images/play.png')}/>
+          <Image style={styles.playIcon} source={require('../../images/play.png')}/>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={handleStop}>
           <Text style={styles.btnText}> Reset </Text>

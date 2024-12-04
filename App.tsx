@@ -2,11 +2,10 @@ import * as React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {Button} from '@react-navigation/elements';
 import {NavigationContainer} from '@react-navigation/native';
-import {Provider} from 'react-redux';
-import { store } from './src/redux/store';
-
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createStaticNavigation, useNavigation} from '@react-navigation/native';
+import {Provider, useSelector} from 'react-redux';
+import {store, RootState, persistor} from './src/redux/store';
 
 import HomeScreen from './src/screens/HomeScreen';
 import Intro from './src/screens/Intro';
@@ -20,10 +19,12 @@ import {EditNoteScreen} from './takenotes/screens/EditNoteScreen';
 import {ToDoHomeScreen} from './ToDoList/ToDoHomeScreen';
 import {AddNoteButton} from './takenotes/components/AddNoteButton';
 import CounterScreen from './src/screens/CounterScreen';
+import {PersistGate} from 'redux-persist/integration/react';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootStack() {
+  const {userData} = useSelector((state: RootState) => state.auth);
   return (
     <Stack.Navigator
       // initialRouteName='NotesHomeScreen'
@@ -33,50 +34,64 @@ function RootStack() {
           backgroundColor: '#222222',
         },
       }}>
-      {/* <Stack.Screen
-        name="Intro"
-        component={Intro}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="HomeScreen"
-        component={HomeScreen}
-        options={{
-          headerTitle: 'Home',
-          headerTitleStyle: styles.headerTitle,
-        }}
-      />
-      <Stack.Screen
-        name="Login"
-        component={Login}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="Signup"
-        component={Signup}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="Stopwatch"
-        component={Stopwatch}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="Calculator"
-        component={Calculator}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
+      {!userData ? (
+        <>
+          <Stack.Screen
+            name="Intro"
+            component={Intro}
+            options={{
+              headerShown: false,
+            }}
+          />
+
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{
+              headerShown: false,
+            }}
+          />
+
+          <Stack.Screen
+            name="Signup"
+            component={Signup}
+            options={{
+              headerShown: false,
+            }}
+          />
+        </>
+      ) : (
+        <>
+          <Stack.Screen
+            name="HomeScreen"
+            component={HomeScreen}
+            options={{
+              headerTitle: 'Home',
+              headerTitleStyle: styles.headerTitle,
+            }}
+          />
+          <Stack.Screen
+            name="Counter"
+            component={CounterScreen}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Stopwatch"
+            component={Stopwatch}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Calculator"
+            component={Calculator}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
         name="NotesHomeScreen"
         component={NotesHomeScreen}
         options={{
@@ -93,14 +108,9 @@ function RootStack() {
           headerTitle: 'All Tasks',
           headerTitleStyle: styles.headerTitle,
         }}
-      /> */}
-      <Stack.Screen
-        name="Counter"
-        component={CounterScreen}
-        options={{
-          headerShown: false,
-        }}
       />
+        </>
+      )}
     </Stack.Navigator>
   );
 }
@@ -108,11 +118,12 @@ function RootStack() {
 export default function App() {
   return (
     <Provider store={store}>
-
-    <NavigationContainer>
-      <RootStack />
-    </NavigationContainer>
-      </Provider>
+      <PersistGate loading={null} persistor={persistor}>
+        <NavigationContainer>
+          <RootStack />
+        </NavigationContainer>
+      </PersistGate>
+    </Provider>
   );
 }
 

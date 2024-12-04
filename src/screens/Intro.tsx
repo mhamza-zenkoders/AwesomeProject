@@ -11,15 +11,12 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import {ScreenNavigationProp} from '../../types'
-// //long-arrow-right
-// const myIcon = ;
-
 
 export default function Intro() {
   const navigation = useNavigation<ScreenNavigationProp>();
   return (
     <ImageBackground
-      source={require('../images/background.jpg')}
+      source={require('../../images/background.jpg')}
       style={styles.background}
       resizeMode="cover">
       <LinearGradient
@@ -34,7 +31,7 @@ export default function Intro() {
               style={styles.button}
               onPress={() => navigation.popTo('Login')}>
               <Text style={styles.buttonText}>Continue</Text>
-              <Icon name="long-arrow-right" size={30} color="#900" />
+              <Icon name="long-arrow-right" size={30} color="#000" />
             </TouchableOpacity>
           </View>
         </View>

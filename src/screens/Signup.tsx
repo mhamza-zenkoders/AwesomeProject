@@ -26,7 +26,7 @@ export default function Signup() {
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled">
           <ImageBackground
-      source={require('../images/background.jpg')}
+      source={require('../../images/background.jpg')}
       style={styles.background}
       blurRadius={10}
       resizeMode="cover">
@@ -39,15 +39,15 @@ export default function Signup() {
           </View>
           <View style={styles.inputContainer}>
             <View style={styles.textInputContainer}>
-              <Image style={styles.icon} source={require('../images/user-solid.png')} />
+              <Image style={styles.icon} source={require('../../images/user-solid.png')} />
               <TextInput style={styles.textInput} placeholder="Enter Full Name" />
             </View>
             <View style={styles.textInputContainer}>
-              <Image style={styles.icon} source={require('../images/envelope-solid.png')} />
+              <Image style={styles.icon} source={require('../../images/envelope-solid.png')} />
               <TextInput style={styles.textInput} placeholder="Enter Email" />
             </View>
             <View style={styles.textInputContainer}>
-              <Image style={styles.icon} source={require('../images/phone-solid.png')} />
+              <Image style={styles.icon} source={require('../../images/phone-solid.png')} />
               <TextInput
                 style={styles.textInput}
                 placeholder="Enter Phone Number"
@@ -55,14 +55,14 @@ export default function Signup() {
               />
             </View>
             <View style={styles.textInputContainer}>
-              <Image style={styles.icon} source={require('../images/lock-solid.png')} />
+              <Image style={styles.icon} source={require('../../images/lock-solid.png')} />
               <TextInput
                 style={styles.textInput}
                 placeholder="Enter Password"
                 secureTextEntry={!passwordVisible}
               />
               <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)}>
-                <Image style={styles.icon} source={require('../images/eye-regular.png')} />
+                <Image style={styles.icon} source={require('../../images/eye-regular.png')} />
               </TouchableOpacity>
             </View>
             <TouchableOpacity

@@ -9,16 +9,32 @@ import {
   ScrollView,
   Platform,
   Image,
-  ImageBackground
+  ImageBackground,
 } from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
-import {ScreenNavigationProp} from '../../types'
+import {ScreenNavigationProp} from '../../types';
+import { useDispatch, useSelector } from 'react-redux';
+import {login} from '../redux/features/AuthSlice'
+import { AppDispatch } from '../redux/store';
+
 
 export default function Login() {
   const navigation = useNavigation<ScreenNavigationProp>();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
 
+  //hooks
+  const dispatch = useDispatch<AppDispatch>()
+  const handleLogin = ()=>{
+    const params = {
+      username:email,
+      password:password,
+    }
+    dispatch(login(params));
+    //navigation.navigate('HomeScreen')
+  }
   return (
     <KeyboardAvoidingView
       style={{flex: 1}}
@@ -26,57 +42,72 @@ export default function Login() {
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled">
-          <ImageBackground
-      source={require('../images/background.jpg')}
-      style={styles.background}
-      blurRadius={10}
-      resizeMode="cover">
-        <View style={styles.container}>
-          <View style={styles.titleContainer}>
-            <Text></Text>
-            <Text style={styles.title}>
-              <Text style={{fontWeight: 'bold'}}>Sign In</Text> To Your Account
-            </Text>
-          </View>
-          <View style={styles.inputContainer}>
-            <View style={styles.textInputContainer}>
-            <Image style={styles.icon} source={require('../images/envelope-regular.png')}></Image>
-              <TextInput style={styles.textInput} placeholder="Enter Email" />
+        <ImageBackground
+          source={require('../../images/background.jpg')}
+          style={styles.background}
+          blurRadius={10}
+          resizeMode="cover">
+          <View style={styles.container}>
+            <View style={styles.titleContainer}>
+              <Text></Text>
+              <Text style={styles.title}>
+                <Text style={{fontWeight: 'bold'}}>Sign In</Text> To Your
+                Account
+              </Text>
             </View>
-            <View style={styles.textInputContainer}>
-            <Image style={styles.icon} source={require('../images/lock-solid.png')}></Image>
-              <TextInput
-                style={styles.textInput}
-                placeholder="Enter Password"
-                secureTextEntry={!passwordVisible}
-              />
-              <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)}>
-              <Image style={styles.icon} source={require('../images/eye-regular.png')}></Image>
-              </TouchableOpacity>
-            </View>
+            <View style={styles.inputContainer}>
+              <View style={styles.textInputContainer}>
+                <Image
+                  style={styles.icon}
+                  source={require('../../images/envelope-regular.png')}></Image>
+                <TextInput
+                  style={styles.textInput}
+                  value={email}
+                  onChangeText={setEmail}
+                  placeholder="Enter Email"
+                />
+              </View>
+              <View style={styles.textInputContainer}>
+                <Image
+                  style={styles.icon}
+                  source={require('../../images/lock-solid.png')}></Image>
+                <TextInput
+                  style={styles.textInput}
+                  value={password}
+                  onChangeText={setPassword}
+                  placeholder="Enter Password"
+                  secureTextEntry={!passwordVisible}
+                />
+                <TouchableOpacity
+                  onPress={() => setPasswordVisible(!passwordVisible)}>
+                  <Image
+                    style={styles.icon}
+                    source={require('../../images/eye-regular.png')}></Image>
+                </TouchableOpacity>
+              </View>
               <TouchableOpacity>
                 <Text style={styles.forgotText}>Forgot Your Password?</Text>
               </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.loginButton}
-              onPress={() => navigation.popTo('HomeScreen')}>
-              <Text style={styles.buttonText}>LOGIN</Text>
-            </TouchableOpacity>
-            <View></View>
-          </View>
-          <View style={styles.bottomContainer}>
-            <View style={styles.bottomText}>
-              <Text style={styles.registerText}>Don't have an Account?</Text>
-              <Text style={styles.registerTitle}>Register Now</Text>
+              <TouchableOpacity
+                style={styles.loginButton}
+                onPress={handleLogin}>
+                <Text style={styles.buttonText}>LOGIN</Text>
+              </TouchableOpacity>
+              <View></View>
             </View>
-            <TouchableOpacity
-              style={styles.bottomButton}
-              onPress={() => navigation.navigate('Signup')}>
-              <Text style={styles.bottomButtonText}>➜</Text>
-            </TouchableOpacity>
+            <View style={styles.bottomContainer}>
+              <View style={styles.bottomText}>
+                <Text style={styles.registerText}>Don't have an Account?</Text>
+                <Text style={styles.registerTitle}>Register Now</Text>
+              </View>
+              <TouchableOpacity
+                style={styles.bottomButton}
+                onPress={() => navigation.navigate('Signup')}>
+                <Text style={styles.bottomButtonText}>➜</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
         </ImageBackground>
       </ScrollView>
     </KeyboardAvoidingView>
@@ -118,20 +149,21 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     paddingVertical: 10,
     height: 70,
-    alignItems:'center',
-    flexDirection:'row'
+    alignItems: 'center',
+    flexDirection: 'row',
   },
 
   textInput: {
-    flex:1,
+    flex: 1,
     fontSize: 18,
+    color: 'white'
   },
 
   icon: {
     width: 20,
     resizeMode: 'contain',
     tintColor: 'grey',
-    marginHorizontal:15,
+    marginHorizontal: 15,
   },
 
   loginButton: {
@@ -146,7 +178,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: 'black',
     textAlign: 'center',
-    fontWeight:'bold'
+    fontWeight: 'bold',
   },
 
   forgotText: {
