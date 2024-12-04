@@ -2,20 +2,24 @@ import * as React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {Button} from '@react-navigation/elements';
 import {NavigationContainer} from '@react-navigation/native';
+import {Provider} from 'react-redux';
+import { store } from './src/redux/store';
+
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createStaticNavigation, useNavigation} from '@react-navigation/native';
 
-import HomeScreen from './screens/HomeScreen';
-import Intro from './screens/Intro';
-import Login from './screens/Login';
-import Signup from './screens/Signup';
+import HomeScreen from './src/screens/HomeScreen';
+import Intro from './src/screens/Intro';
+import Login from './src/screens/Login';
+import Signup from './src/screens/Signup';
 import {RootStackParamList} from './types';
-import {Stopwatch} from './Stopwatch';
-import {Calculator} from './Calculator';
+import {Stopwatch} from './src/screens/Stopwatch';
+import {Calculator} from './src/screens/Calculator';
 import {NotesHomeScreen} from './takenotes/screens/NotesHomeScreen';
 import {EditNoteScreen} from './takenotes/screens/EditNoteScreen';
 import {ToDoHomeScreen} from './ToDoList/ToDoHomeScreen';
 import {AddNoteButton} from './takenotes/components/AddNoteButton';
+import CounterScreen from './src/screens/CounterScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -29,7 +33,7 @@ function RootStack() {
           backgroundColor: '#222222',
         },
       }}>
-      <Stack.Screen
+      {/* <Stack.Screen
         name="Intro"
         component={Intro}
         options={{
@@ -89,6 +93,13 @@ function RootStack() {
           headerTitle: 'All Tasks',
           headerTitleStyle: styles.headerTitle,
         }}
+      /> */}
+      <Stack.Screen
+        name="Counter"
+        component={CounterScreen}
+        options={{
+          headerShown: false,
+        }}
       />
     </Stack.Navigator>
   );
@@ -96,9 +107,12 @@ function RootStack() {
 
 export default function App() {
   return (
+    <Provider store={store}>
+
     <NavigationContainer>
       <RootStack />
     </NavigationContainer>
+      </Provider>
   );
 }
 

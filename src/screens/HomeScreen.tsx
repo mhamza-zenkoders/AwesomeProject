@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {ScreenNavigationProp} from '../types';
+import {ScreenNavigationProp} from '../../types';
 
 export default function HomeScreen() {
   const navigation = useNavigation<ScreenNavigationProp>();

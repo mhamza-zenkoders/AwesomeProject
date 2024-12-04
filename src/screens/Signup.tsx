@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -11,17 +11,16 @@ import {
   Image,
   ImageBackground
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import {ScreenNavigationProp} from '../../types'
 
-import {useNavigation} from '@react-navigation/native';
-import {ScreenNavigationProp} from '../types'
-
-export default function Login() {
+export default function Signup() {
   const navigation = useNavigation<ScreenNavigationProp>();
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   return (
     <KeyboardAvoidingView
-      style={{flex: 1}}
+      style={{ flex: 1 }}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
@@ -35,44 +34,51 @@ export default function Login() {
           <View style={styles.titleContainer}>
             <Text></Text>
             <Text style={styles.title}>
-              <Text style={{fontWeight: 'bold'}}>Sign In</Text> To Your Account
+              <Text style={{ fontWeight: 'bold' }}>Create</Text> Your New Account
             </Text>
           </View>
           <View style={styles.inputContainer}>
             <View style={styles.textInputContainer}>
-            <Image style={styles.icon} source={require('../images/envelope-regular.png')}></Image>
+              <Image style={styles.icon} source={require('../images/user-solid.png')} />
+              <TextInput style={styles.textInput} placeholder="Enter Full Name" />
+            </View>
+            <View style={styles.textInputContainer}>
+              <Image style={styles.icon} source={require('../images/envelope-solid.png')} />
               <TextInput style={styles.textInput} placeholder="Enter Email" />
             </View>
             <View style={styles.textInputContainer}>
-            <Image style={styles.icon} source={require('../images/lock-solid.png')}></Image>
+              <Image style={styles.icon} source={require('../images/phone-solid.png')} />
+              <TextInput
+                style={styles.textInput}
+                placeholder="Enter Phone Number"
+                keyboardType="phone-pad"
+              />
+            </View>
+            <View style={styles.textInputContainer}>
+              <Image style={styles.icon} source={require('../images/lock-solid.png')} />
               <TextInput
                 style={styles.textInput}
                 placeholder="Enter Password"
                 secureTextEntry={!passwordVisible}
               />
               <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)}>
-              <Image style={styles.icon} source={require('../images/eye-regular.png')}></Image>
+                <Image style={styles.icon} source={require('../images/eye-regular.png')} />
               </TouchableOpacity>
             </View>
-              <TouchableOpacity>
-                <Text style={styles.forgotText}>Forgot Your Password?</Text>
-              </TouchableOpacity>
-
             <TouchableOpacity
               style={styles.loginButton}
               onPress={() => navigation.popTo('HomeScreen')}>
-              <Text style={styles.buttonText}>LOGIN</Text>
+              <Text style={styles.buttonText}>SIGNUP</Text>
             </TouchableOpacity>
-            <View></View>
           </View>
           <View style={styles.bottomContainer}>
             <View style={styles.bottomText}>
-              <Text style={styles.registerText}>Don't have an Account?</Text>
-              <Text style={styles.registerTitle}>Register Now</Text>
+              <Text style={styles.registerText}>Already have an Account?</Text>
+              <Text style={styles.registerTitle}>Login Now</Text>
             </View>
             <TouchableOpacity
               style={styles.bottomButton}
-              onPress={() => navigation.navigate('Signup')}>
+              onPress={() => navigation.goBack()}>
               <Text style={styles.bottomButtonText}>➜</Text>
             </TouchableOpacity>
           </View>
@@ -93,47 +99,41 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
     paddingVertical: 30,
   },
-
   scrollContainer: {
     flexGrow: 1,
   },
-
   titleContainer: {
     justifyContent: 'flex-start',
   },
-
   title: {
     color: 'white',
     fontSize: 45,
   },
-
   inputContainer: {
     flex: 1,
     justifyContent: 'center',
+    marginBottom: 20,
   },
-
   textInputContainer: {
     backgroundColor: '#333030',
     marginVertical: 15,
     borderRadius: 20,
-    paddingVertical: 10,
     height: 70,
-    alignItems:'center',
-    flexDirection:'row'
+    flexDirection: 'row',
+    alignItems: 'center',
   },
-
   textInput: {
-    flex:1,
+    flex: 1,
     fontSize: 18,
+    paddingLeft: 10,
   },
-
   icon: {
     width: 20,
+    height: 25,
     resizeMode: 'contain',
     tintColor: 'grey',
-    marginHorizontal:15,
+    marginHorizontal: 15,
   },
-
   loginButton: {
     backgroundColor: '#B1DDB8',
     padding: 20,
@@ -141,42 +141,35 @@ const styles = StyleSheet.create({
     height: 70,
     marginVertical: 15,
   },
-
   buttonText: {
     fontSize: 20,
     color: 'black',
     textAlign: 'center',
     fontWeight:'bold'
   },
-
   forgotText: {
     fontSize: 15,
     color: 'white',
     textAlign: 'right',
     marginVertical: 15,
   },
-
   bottomContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-
   bottomText: {
     width: 300,
   },
-
   registerTitle: {
     fontSize: 35,
     fontWeight: 'bold',
     color: 'white',
   },
-
   registerText: {
     fontSize: 20,
     color: 'white',
   },
-
   bottomButton: {
     width: 70,
     height: 70,
@@ -185,9 +178,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-
   bottomButtonText: {
     fontSize: 20,
     includeFontPadding: false,
   },
+
 });

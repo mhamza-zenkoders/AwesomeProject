@@ -11,6 +11,7 @@ export type RootStackParamList = {
   NotesHomeScreen: undefined;
   EditNote: { noteId: string | undefined };
   ToDoHomeScreen: undefined;
+  Counter: undefined;
 };
 
 export type ScreenNavigationProp =

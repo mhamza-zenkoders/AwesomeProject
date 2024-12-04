@@ -7,10 +7,13 @@ import {
   StyleSheet,
   Image,
 } from 'react-native';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
-import {ScreenNavigationProp} from '../types'
+import {ScreenNavigationProp} from '../../types'
+// //long-arrow-right
+// const myIcon = ;
+
 
 export default function Intro() {
   const navigation = useNavigation<ScreenNavigationProp>();
@@ -31,10 +34,7 @@ export default function Intro() {
               style={styles.button}
               onPress={() => navigation.popTo('Login')}>
               <Text style={styles.buttonText}>Continue</Text>
-              <Image
-                source={require('../images/rightarrow.png')}
-                style={styles.arrowIcon}
-              />
+              <Icon name="long-arrow-right" size={30} color="#900" />
             </TouchableOpacity>
           </View>
         </View>
