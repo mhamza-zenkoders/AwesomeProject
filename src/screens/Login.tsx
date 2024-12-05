@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -11,30 +11,45 @@ import {
   Image,
   ImageBackground,
 } from 'react-native';
+import LoginButton from '../components/LoginButton';
 
+import LoginRoundButton from '../components/LoginRoundButton';
 import {useNavigation} from '@react-navigation/native';
 import {ScreenNavigationProp} from '../../types';
-import { useDispatch, useSelector } from 'react-redux';
-import {login} from '../redux/features/AuthSlice'
-import { AppDispatch } from '../redux/store';
-
+import {useDispatch, useSelector} from 'react-redux';
+import {login} from '../redux/features/AuthSlice';
+import {AppDispatch} from '../redux/store';
+import {RootState} from '../redux/store';
+import {clearError} from '../redux/features/AuthSlice';
 
 export default function Login() {
-  const navigation = useNavigation<ScreenNavigationProp>();
+  const {isError, errorMessage} = useSelector((state: RootState) => state.auth);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const navigation = useNavigation<ScreenNavigationProp>();
+  const dispatch = useDispatch<AppDispatch>();
 
-  //hooks
-  const dispatch = useDispatch<AppDispatch>()
-  const handleLogin = ()=>{
+  useEffect(() => {
+    dispatch(clearError());
+  }, [dispatch]);
+
+  const handleEmailChange = (text: string) => {
+    setEmail(text);
+    dispatch(clearError());
+  };
+
+  const handlePasswordChange = (text: string) => {
+    setPassword(text);
+    dispatch(clearError());
+  };
+  const handleLogin = () => {
     const params = {
-      username:email,
-      password:password,
-    }
+      username: email,
+      password: password,
+    };
     dispatch(login(params));
-    //navigation.navigate('HomeScreen')
-  }
+  };
   return (
     <KeyboardAvoidingView
       style={{flex: 1}}
@@ -63,7 +78,7 @@ export default function Login() {
                 <TextInput
                   style={styles.textInput}
                   value={email}
-                  onChangeText={setEmail}
+                  onChangeText={handleEmailChange}
                   placeholder="Enter Email"
                 />
               </View>
@@ -74,7 +89,7 @@ export default function Login() {
                 <TextInput
                   style={styles.textInput}
                   value={password}
-                  onChangeText={setPassword}
+                  onChangeText={handlePasswordChange}
                   placeholder="Enter Password"
                   secureTextEntry={!passwordVisible}
                 />
@@ -85,27 +100,20 @@ export default function Login() {
                     source={require('../../images/eye-regular.png')}></Image>
                 </TouchableOpacity>
               </View>
+              {isError && (
+                <Text style={styles.errorMessage}>{errorMessage}</Text>
+              )}
               <TouchableOpacity>
                 <Text style={styles.forgotText}>Forgot Your Password?</Text>
               </TouchableOpacity>
-
-              <TouchableOpacity
-                style={styles.loginButton}
-                onPress={handleLogin}>
-                <Text style={styles.buttonText}>LOGIN</Text>
-              </TouchableOpacity>
-              <View></View>
+              <LoginButton title="Login" onPress={handleLogin} />
             </View>
             <View style={styles.bottomContainer}>
               <View style={styles.bottomText}>
                 <Text style={styles.registerText}>Don't have an Account?</Text>
                 <Text style={styles.registerTitle}>Register Now</Text>
               </View>
-              <TouchableOpacity
-                style={styles.bottomButton}
-                onPress={() => navigation.navigate('Signup')}>
-                <Text style={styles.bottomButtonText}>➜</Text>
-              </TouchableOpacity>
+              <LoginRoundButton onPress={() => navigation.navigate('Signup')} />
             </View>
           </View>
         </ImageBackground>
@@ -156,7 +164,7 @@ const styles = StyleSheet.create({
   textInput: {
     flex: 1,
     fontSize: 18,
-    color: 'white'
+    color: 'white',
   },
 
   icon: {
@@ -179,6 +187,11 @@ const styles = StyleSheet.create({
     color: 'black',
     textAlign: 'center',
     fontWeight: 'bold',
+  },
+  errorMessage: {
+    color: 'red',
+    fontSize: 15,
+    textAlign: 'center',
   },
 
   forgotText: {
@@ -207,19 +220,5 @@ const styles = StyleSheet.create({
   registerText: {
     fontSize: 20,
     color: 'white',
-  },
-
-  bottomButton: {
-    width: 70,
-    height: 70,
-    borderRadius: 35,
-    backgroundColor: '#B1DDB8',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  bottomButtonText: {
-    fontSize: 20,
-    includeFontPadding: false,
   },
 });

@@ -23,6 +23,7 @@ export interface AuthState {
   isLoading: boolean;
   isSuccess: boolean;
   isError: boolean;
+  errorMessage: string | undefined;
 }
 
 const initialState: AuthState = {
@@ -30,16 +31,17 @@ const initialState: AuthState = {
   isLoading: false,
   isSuccess: false,
   isError: false,
+  errorMessage:undefined
 };
 
-export const login = createAsyncThunk<UserData, LoginParams>(
+export const login = createAsyncThunk<UserData, LoginParams, { rejectValue: string }>(
   'auth/login',
   async (params: LoginParams, thunkApi) => {
     try {
       const response = await API.post('auth/login', params);
       return response.data as UserData;
     } catch (err: any) {
-      return thunkApi.rejectWithValue(err.response?.data || err.message);
+      return thunkApi.rejectWithValue(err.response?.data?.message || err.message);
     }
   },
 );
@@ -52,6 +54,12 @@ const AuthSlice = createSlice({
       state.userData = null;
       state.isSuccess = false;
       state.isError = false;
+      state.errorMessage = undefined;
+    },
+
+    clearError: state => {
+      state.isError = false;
+      state.errorMessage = undefined;
     },
   },
   extraReducers: builder => {
@@ -69,14 +77,16 @@ const AuthSlice = createSlice({
         state.userData = action.payload;
       },
     );
-    builder.addCase(login.rejected, state => {
+    builder.addCase(login.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = true;
       state.isSuccess = false;
       state.userData = null;
+      state.errorMessage  = action.payload as string;
     });
   },
 });
 
 export default AuthSlice.reducer;
 export const {logout} = AuthSlice.actions;
+export const {clearError} = AuthSlice.actions;

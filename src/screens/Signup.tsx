@@ -11,12 +11,18 @@ import {
   Image,
   ImageBackground
 } from 'react-native';
+import LoginRoundButton from '../components/LoginRoundButton'
+import LoginButton from '../components/LoginButton'
+
 import { useNavigation } from '@react-navigation/native';
 import {ScreenNavigationProp} from '../../types'
 
 export default function Signup() {
   const navigation = useNavigation<ScreenNavigationProp>();
   const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const handleSignup = () => {
+  };
 
   return (
     <KeyboardAvoidingView
@@ -65,22 +71,14 @@ export default function Signup() {
                 <Image style={styles.icon} source={require('../../images/eye-regular.png')} />
               </TouchableOpacity>
             </View>
-            <TouchableOpacity
-              style={styles.loginButton}
-              onPress={() => navigation.popTo('HomeScreen')}>
-              <Text style={styles.buttonText}>SIGNUP</Text>
-            </TouchableOpacity>
+            <LoginButton title="SIGN UP" onPress={handleSignup} />
           </View>
           <View style={styles.bottomContainer}>
             <View style={styles.bottomText}>
               <Text style={styles.registerText}>Already have an Account?</Text>
               <Text style={styles.registerTitle}>Login Now</Text>
             </View>
-            <TouchableOpacity
-              style={styles.bottomButton}
-              onPress={() => navigation.goBack()}>
-              <Text style={styles.bottomButtonText}>➜</Text>
-            </TouchableOpacity>
+            <LoginRoundButton onPress={() => navigation.goBack()}/>
           </View>
         </View>
         </ImageBackground>
