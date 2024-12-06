@@ -12,8 +12,8 @@ import {
   ImageBackground,
 } from 'react-native';
 import LoginButton from '../components/LoginButton';
-
 import LoginRoundButton from '../components/LoginRoundButton';
+import LoginInput from '../components/LoginInput' 
 import {useNavigation} from '@react-navigation/native';
 import {ScreenNavigationProp} from '../../types';
 import {useDispatch, useSelector} from 'react-redux';
@@ -71,7 +71,7 @@ export default function Login() {
               </Text>
             </View>
             <View style={styles.inputContainer}>
-              <View style={styles.textInputContainer}>
+              {/* <View style={styles.textInputContainer}>
                 <Image
                   style={styles.icon}
                   source={require('../../images/envelope-regular.png')}></Image>
@@ -81,8 +81,14 @@ export default function Login() {
                   onChangeText={handleEmailChange}
                   placeholder="Enter Email"
                 />
-              </View>
-              <View style={styles.textInputContainer}>
+              </View> */}
+              <LoginInput
+                  iconName={'user'}
+                  value={email}
+                  onChangeText={handleEmailChange}
+                  placeHolder={"Enter Username"}/>
+                  
+              {/* <View style={styles.textInputContainer}>
                 <Image
                   style={styles.icon}
                   source={require('../../images/lock-solid.png')}></Image>
@@ -99,7 +105,19 @@ export default function Login() {
                     style={styles.icon}
                     source={require('../../images/eye-regular.png')}></Image>
                 </TouchableOpacity>
-              </View>
+
+                
+              </View> */}
+
+              <LoginInput
+                  iconName={'lock'}
+                  value={password}
+                  onChangeText={handlePasswordChange}
+                  placeHolder={"Enter Password"}
+                  secureTextEntry={!passwordVisible}
+                  rightIconName='eyeo'
+                  onPressFunc={() => setPasswordVisible(!passwordVisible)}/>
+              
               {isError && (
                 <Text style={styles.errorMessage}>{errorMessage}</Text>
               )}
@@ -149,22 +167,6 @@ const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
     justifyContent: 'center',
-  },
-
-  textInputContainer: {
-    backgroundColor: '#333030',
-    marginVertical: 15,
-    borderRadius: 20,
-    paddingVertical: 10,
-    height: 70,
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-
-  textInput: {
-    flex: 1,
-    fontSize: 18,
-    color: 'white',
   },
 
   icon: {

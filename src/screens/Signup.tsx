@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -9,78 +9,132 @@ import {
   ScrollView,
   Platform,
   Image,
-  ImageBackground
+  ImageBackground,
 } from 'react-native';
-import LoginRoundButton from '../components/LoginRoundButton'
-import LoginButton from '../components/LoginButton'
+import LoginRoundButton from '../components/LoginRoundButton';
+import LoginButton from '../components/LoginButton';
+import LoginInput from '../components/LoginInput';
 
-import { useNavigation } from '@react-navigation/native';
-import {ScreenNavigationProp} from '../../types'
+import {useNavigation} from '@react-navigation/native';
+import {ScreenNavigationProp} from '../../types';
 
 export default function Signup() {
   const navigation = useNavigation<ScreenNavigationProp>();
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [password, setPassword] = useState('')
 
-  const handleSignup = () => {
-  };
+  const handleSignup = () => {};
 
   return (
     <KeyboardAvoidingView
-      style={{ flex: 1 }}
+      style={{flex: 1}}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled">
-          <ImageBackground
-      source={require('../../images/background.jpg')}
-      style={styles.background}
-      blurRadius={10}
-      resizeMode="cover">
-        <View style={styles.container}>
-          <View style={styles.titleContainer}>
-            <Text></Text>
-            <Text style={styles.title}>
-              <Text style={{ fontWeight: 'bold' }}>Create</Text> Your New Account
-            </Text>
-          </View>
-          <View style={styles.inputContainer}>
-            <View style={styles.textInputContainer}>
-              <Image style={styles.icon} source={require('../../images/user-solid.png')} />
-              <TextInput style={styles.textInput} placeholder="Enter Full Name" />
+        <ImageBackground
+          source={require('../../images/background.jpg')}
+          style={styles.background}
+          blurRadius={10}
+          resizeMode="cover">
+          <View style={styles.container}>
+            <View style={styles.titleContainer}>
+              <Text></Text>
+              <Text style={styles.title}>
+                <Text style={{fontWeight: 'bold'}}>Create</Text> Your New
+                Account
+              </Text>
             </View>
-            <View style={styles.textInputContainer}>
-              <Image style={styles.icon} source={require('../../images/envelope-solid.png')} />
-              <TextInput style={styles.textInput} placeholder="Enter Email" />
-            </View>
-            <View style={styles.textInputContainer}>
-              <Image style={styles.icon} source={require('../../images/phone-solid.png')} />
-              <TextInput
-                style={styles.textInput}
-                placeholder="Enter Phone Number"
-                keyboardType="phone-pad"
+            <View style={styles.inputContainer}>
+              {/* <View style={styles.textInputContainer}>
+                <Image
+                  style={styles.icon}
+                  source={require('../../images/user-solid.png')}
+                />
+                <TextInput
+                  style={styles.textInput}
+                  placeholder="Enter Full Name"
+                />
+              </View> */}
+              <LoginInput
+                iconName={'user'}
+                value={username}
+                placeHolder={'Enter Username'}
+                onChangeText={setUsername}
               />
-            </View>
-            <View style={styles.textInputContainer}>
-              <Image style={styles.icon} source={require('../../images/lock-solid.png')} />
-              <TextInput
-                style={styles.textInput}
-                placeholder="Enter Password"
+              <LoginInput
+                iconName={'envelope'}
+                value={email}
+                placeHolder={'Enter Email'}
+                onChangeText={setEmail}
+              />
+              <LoginInput
+                iconName={'phone'}
+                value={phone}
+                placeHolder={'Enter Phone'}
+                onChangeText={setPhone}
+              />
+              <LoginInput
+                iconName={'lock'}
+                value={password}
+                placeHolder={'Create Password'}
+                onChangeText={setPassword}
                 secureTextEntry={!passwordVisible}
+                rightIconName="eyeo"
+                onPressFunc={() => setPasswordVisible(!passwordVisible)}
               />
-              <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)}>
-                <Image style={styles.icon} source={require('../../images/eye-regular.png')} />
-              </TouchableOpacity>
+{/* 
+              <View style={styles.textInputContainer}>
+                <Image
+                  style={styles.icon}
+                  source={require('../../images/envelope-solid.png')}
+                />
+                <TextInput style={styles.textInput} placeholder="Enter Email" />
+              </View>
+              <View style={styles.textInputContainer}>
+                <Image
+                  style={styles.icon}
+                  source={require('../../images/phone-solid.png')}
+                />
+                <TextInput
+                  style={styles.textInput}
+                  placeholder="Enter Phone Number"
+                  keyboardType="phone-pad"
+                />
+              </View>
+              <View style={styles.textInputContainer}>
+                <Image
+                  style={styles.icon}
+                  source={require('../../images/lock-solid.png')}
+                />
+                <TextInput
+                  style={styles.textInput}
+                  placeholder="Enter Password"
+                  secureTextEntry={!passwordVisible}
+                />
+                <TouchableOpacity
+                  onPress={() => setPasswordVisible(!passwordVisible)}>
+                  <Image
+                    style={styles.icon}
+                    source={require('../../images/eye-regular.png')}
+                  />
+                </TouchableOpacity>
+              </View> */}
+              <LoginButton title="SIGN UP" onPress={handleSignup} />
             </View>
-            <LoginButton title="SIGN UP" onPress={handleSignup} />
-          </View>
-          <View style={styles.bottomContainer}>
-            <View style={styles.bottomText}>
-              <Text style={styles.registerText}>Already have an Account?</Text>
-              <Text style={styles.registerTitle}>Login Now</Text>
+            <View style={styles.bottomContainer}>
+              <View style={styles.bottomText}>
+                <Text style={styles.registerText}>
+                  Already have an Account?
+                </Text>
+                <Text style={styles.registerTitle}>Login Now</Text>
+              </View>
+              <LoginRoundButton onPress={() => navigation.goBack()} />
             </View>
-            <LoginRoundButton onPress={() => navigation.goBack()}/>
           </View>
-        </View>
         </ImageBackground>
       </ScrollView>
     </KeyboardAvoidingView>
@@ -143,7 +197,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: 'black',
     textAlign: 'center',
-    fontWeight:'bold'
+    fontWeight: 'bold',
   },
   forgotText: {
     fontSize: 15,
@@ -180,5 +234,4 @@ const styles = StyleSheet.create({
     fontSize: 20,
     includeFontPadding: false,
   },
-
 });

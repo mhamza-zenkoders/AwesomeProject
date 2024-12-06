@@ -25,7 +25,6 @@ export const getNote = async (id: string) => {
 };
 
 export const saveNote = async (text: string, noteId: string | undefined) => {
-  console.log('SAve called ')
   const noteStore = await getAllNotes();
   if (noteId) {
     const noteIndex = noteStore.notes.findIndex((note) => note.id == noteId);

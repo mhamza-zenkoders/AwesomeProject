@@ -4,6 +4,7 @@ import {Button} from '@react-navigation/elements';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createStaticNavigation, useNavigation} from '@react-navigation/native';
+
 import {Provider, useSelector} from 'react-redux';
 import {store, RootState, persistor} from './src/redux/store';
 
@@ -22,7 +23,6 @@ import CounterScreen from './src/screens/CounterScreen';
 import {PersistGate} from 'redux-persist/integration/react';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
-
 function RootStack() {
   const {userData} = useSelector((state: RootState) => state.auth);
   return (
