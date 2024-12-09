@@ -12,6 +12,8 @@ export type RootStackParamList = {
   EditNote: { noteId: string | undefined };
   ToDoHomeScreen: undefined;
   Counter: undefined;
+  Products: undefined;
+  AddProduct: undefined;
 };
 
 export type ScreenNavigationProp =
@@ -19,3 +21,16 @@ export type ScreenNavigationProp =
 
 
 export type EditScreenRouteProp = RouteProp<RootStackParamList, "EditNote">;
+
+
+
+
+
+export interface Product {
+  title: string;
+  description: string;
+  category: string;
+  price: string;
+  id:string
+}
+

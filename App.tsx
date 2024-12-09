@@ -12,6 +12,7 @@ import HomeScreen from './src/screens/HomeScreen';
 import Intro from './src/screens/Intro';
 import Login from './src/screens/Login';
 import Signup from './src/screens/Signup';
+import Products from './src/screens/Products';
 import {RootStackParamList} from './types';
 import {Stopwatch} from './src/screens/Stopwatch';
 import {Calculator} from './src/screens/Calculator';
@@ -21,6 +22,7 @@ import {ToDoHomeScreen} from './ToDoList/ToDoHomeScreen';
 import {AddNoteButton} from './takenotes/components/AddNoteButton';
 import CounterScreen from './src/screens/CounterScreen';
 import {PersistGate} from 'redux-persist/integration/react';
+import AddProduct from './src/screens/AddProduct';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootStack() {
@@ -92,23 +94,37 @@ function RootStack() {
             }}
           />
           <Stack.Screen
-        name="NotesHomeScreen"
-        component={NotesHomeScreen}
-        options={{
-          headerTitle: 'All Notes',
-          headerTitleStyle: styles.headerTitle,
-          // headerRight: () => <AddNoteButton />,
-        }}
-      />
-      <Stack.Screen name="EditNote" component={EditNoteScreen} />
-      <Stack.Screen
-        name="ToDoHomeScreen"
-        component={ToDoHomeScreen}
-        options={{
-          headerTitle: 'All Tasks',
-          headerTitleStyle: styles.headerTitle,
-        }}
-      />
+            name="Products"
+            component={Products}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="AddProduct"
+            component={AddProduct}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="NotesHomeScreen"
+            component={NotesHomeScreen}
+            options={{
+              headerTitle: 'All Notes',
+              headerTitleStyle: styles.headerTitle,
+              // headerRight: () => <AddNoteButton />,
+            }}
+          />
+          <Stack.Screen name="EditNote" component={EditNoteScreen} />
+          <Stack.Screen
+            name="ToDoHomeScreen"
+            component={ToDoHomeScreen}
+            options={{
+              headerTitle: 'All Tasks',
+              headerTitleStyle: styles.headerTitle,
+            }}
+          />
         </>
       )}
     </Stack.Navigator>

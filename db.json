@@ -1,0 +1,39 @@
+{
+  "products": [
+    {
+      "title": "Wireless Headphones",
+      "description": "High-quality Bluetooth headphones with noise cancellation.",
+      "category": "Electronics",
+      "price": "79.99",
+      "id": "16e6"
+    },
+    {
+      "title": "Running Shoes",
+      "description": "Comfortable and durable running shoes for everyday use.",
+      "category": "Sportswear",
+      "price": "49.99",
+      "id": "f944"
+    },
+    {
+      "title": "Coffee Maker",
+      "description": "Brews the perfect cup of coffee every time.",
+      "category": "Home Appliances",
+      "price": "39.99",
+      "id": "227e"
+    },
+    {
+      "title": "Yoga Mat",
+      "description": "Non-slip, eco-friendly yoga mat with carrying strap.",
+      "category": "Fitness",
+      "price": "19.99",
+      "id": "d632"
+    },
+    {
+      "title": "Desk Lamp",
+      "description": "Adjustable LED desk lamp with multiple brightness levels.",
+      "category": "Furniture",
+      "price": "24.99",
+      "id": "f528"
+    }
+  ]
+}

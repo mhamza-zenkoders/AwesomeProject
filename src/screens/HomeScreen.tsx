@@ -41,6 +41,11 @@ export default function HomeScreen() {
           onPress={() => navigation.navigate('Counter')}
           imageSrc={require('../../images/counter.png')}
         />
+        <HomeMenuButtons
+          title="Products"
+          onPress={() => navigation.navigate('Products')}
+          imageSrc={require('../../images/counter.png')}
+        />
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
@@ -58,7 +63,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#000',
+    backgroundColor: '#141414',
     paddingHorizontal: 10,
     paddingVertical: 30,
   },
